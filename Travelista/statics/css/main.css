@@ -3864,6 +3864,11 @@ body.mobile-nav-active #mobile-nav-toggle {
   transition: all 0.3s ease 0s;
 }
 
+.details-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .single-post-area .social-links li a:hover {
   color: #f8b600;
 }
