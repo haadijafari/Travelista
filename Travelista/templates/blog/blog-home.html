@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load blog_tags %}
 
 {% block content %}
 <!-- start banner Area -->
@@ -35,7 +36,7 @@
 					<div class="col-lg-3  col-md-3 meta-details">
 						<ul class="tags">
 							{% for cat in post.category.all %}
-							<li><a href="#">
+							<li><a href="{% url 'blog:category' cat_name=cat %}">
 								{{cat.name}}
 								{% if not forloop.last %}, {% endif %}
 							</a></li>
@@ -60,29 +61,9 @@
 					</div>
 				</div>
 				{% endfor %}
-				<nav class="blog-pagination justify-content-center d-flex">
-					<ul class="pagination">
-						<li class="page-item">
-							<a href="#" class="page-link" aria-label="Previous">
-								<span aria-hidden="true">
-									<span class="lnr lnr-chevron-left"></span>
-								</span>
-							</a>
-						</li>
-						<li class="page-item"><a href="#" class="page-link">01</a></li>
-						<li class="page-item active"><a href="#" class="page-link">02</a></li>
-						<li class="page-item"><a href="#" class="page-link">03</a></li>
-						<li class="page-item"><a href="#" class="page-link">04</a></li>
-						<li class="page-item"><a href="#" class="page-link">09</a></li>
-						<li class="page-item">
-							<a href="#" class="page-link" aria-label="Next">
-								<span aria-hidden="true">
-									<span class="lnr lnr-chevron-right"></span>
-								</span>
-							</a>
-						</li>
-					</ul>
-				</nav>
+				
+				{% include 'blog/blog-paginate.html' %}
+
 			</div>
 			<div class="col-lg-4 sidebar-widgets">
 				<div class="widget-wrap">
@@ -91,11 +72,11 @@
 					
 					{% include 'blog/blog-user.html' %}
 
-					{% include 'blog/blog-popular-post.html' %}
+					{% latest_posts 5 %}
 					
 					{% include 'blog/blog-ads.html' %}
 					
-					{% include 'blog/blog-post-category.html' %}
+					{% categories %}
 					
 					{% include 'blog/blog-newsletter.html' %}
 					
