@@ -3909,6 +3909,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .single-post-area .navigation-area .nav-left .thumb img {
+  max-width: 100px;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
@@ -3948,6 +3949,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .single-post-area .navigation-area .nav-right .thumb img {
+  max-width: 100px;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;

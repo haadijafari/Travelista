@@ -2,11 +2,11 @@ from django.shortcuts import render, get_object_or_404
 from blog.models import Post
 from itertools import chain
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from datetime import datetime   #This is for filtering by published_date
+from django.utils import timezone   #This is for filtering by published_date
 
 
 def blog_home(request, **kwargs):
-    current_datetime = datetime.now()    #This is for filtering by published_date
+    current_datetime = timezone.now()    #This is for filtering by published_date
     posts = Post.objects.filter(published_date__lt=current_datetime)     #This is for filtering by published_date
     posts = posts.filter(status=1).order_by('-published_date')
     if cat_name := kwargs.get('cat_name'):
@@ -28,13 +28,15 @@ def blog_home(request, **kwargs):
 
 
 def blog_single(request, **kwargs):
-    posts = Post.objects.filter(status=1)
+    current_datetime = timezone.now()    #This is for filtering by published_date
+    posts = Post.objects.filter(published_date__lt=current_datetime)
+    posts = posts.filter(status=1)
     if pid := kwargs.get('pid'):
         post = posts.get(id=pid)
         post.counted_views += 1
         post.save()
         # post = get_object_or_404(posts, pk=pid)
-    content = {'post': post, 'all_posts': posts }
+    content = {'post': post, 'posts': posts }
     return render(request, 'blog/blog-single.html', content)
 
 

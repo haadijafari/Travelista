@@ -64,30 +64,38 @@
 				</div>
 				<div class="navigation-area">
 					<div class="row">
+						{% with prev_post=post|get_previous_post:posts %}
+							{% if prev_post %}
 						<div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
 							<div class="thumb">
-								<a href="#"><img class="img-fluid" src="{% static 'img/blog/prev.jpg' %}" alt=""></a>
+								<a href="{% url 'blog:single' pid=prev_post.id %}"><img class="img-fluid" src="{{prev_post.img.url}}" alt=""></a>
 							</div>
 							<div class="arrow">
-								<a href="#"><span class="lnr text-white lnr-arrow-left"></span></a>
+								<a href="{% url 'blog:single' pid=prev_post.id %}"><span class="lnr text-white lnr-arrow-left"></span></a>
 							</div>
 							<div class="detials">
 								<p>Prev Post</p>
-								<a href="#"><h4>Space The Final Frontier</h4></a>
+								<a href="{% url 'blog:single' pid=prev_post.id %}"><h4>{{prev_post.title}}</h4></a>
 							</div>
 						</div>
+							{% endif %}
+						{% endwith %}
+						{% with next_post=post|get_next_post:posts %}
+        					{% if next_post %}
 						<div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
 							<div class="detials">
 								<p>Next Post</p>
-								<a href="#"><h4>Telescopes 101</h4></a>
+								<a href="{% url 'blog:single' pid=next_post.id %}"><h4>{{next_post.title}}</h4></a>
 							</div>
 							<div class="arrow">
-								<a href="#"><span class="lnr text-white lnr-arrow-right"></span></a>
+								<a href="{% url 'blog:single' pid=next_post.id %}"><span class="lnr text-white lnr-arrow-right"></span></a>
 							</div>
 							<div class="thumb">
-								<a href="#"><img class="img-fluid" src="{% static 'img/blog/next.jpg' %}" alt=""></a>
+								<a href="{% url 'blog:single' pid=next_post.id %}"><img class="img-fluid" src="{{next_post.img.url}}" alt=""></a>
 							</div>										
-						</div>									
+						</div>
+							{% endif %}
+    					{% endwith %}
 					</div>
 				</div>
 				<div class="comments-area">
