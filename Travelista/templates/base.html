@@ -91,7 +91,7 @@
 			</div>
 		</header><!-- #header -->
 
-        {% block content %}{% endblock content %}
+        {% block content %}{% block popup_content %}{% endblock %}{% endblock content %}
 
         <!-- start footer Area -->		
 		<footer class="footer-area section-gap">
@@ -191,6 +191,21 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		<script src="{% static 'js/jquery.nice-select.min.js' %}"></script>					
 		<script src="{% static 'js/owl.carousel.min.js' %}"></script>							
 		<script src="{% static 'js/mail-script.js' %}"></script>	
-		<script src="{% static 'js/main.js' %}"></script>	
+		<script src="{% static 'js/main.js' %}"></script>
+
+		<!-- JavaScript to show and close the popup -->
+		<script>
+			const messagePopup = document.getElementById('message-popup');
+        	const closePopupButton = document.getElementById('close-popup');
+
+			// Show the popup if there are messages to display
+			{% if messages %}
+			messagePopup.style.display = 'block';
+			{% endif %}
+
+			closePopupButton.addEventListener('click', () => {
+				messagePopup.style.display = 'none';
+			});
+		</script>
 	</body>
 </html>
