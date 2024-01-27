@@ -8,9 +8,13 @@ https://docs.djangoproject.com/en/3.2/howto/deployment/asgi/
 """
 
 import os
+from Travelista.settings.settings import DEBUG
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Travelista.settings')
+if DEBUG:
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Travelista.settings.dev')
+else:
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Travelista.settings.prod')
 
 application = get_asgi_application()

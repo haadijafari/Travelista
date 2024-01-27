@@ -8,9 +8,13 @@ https://docs.djangoproject.com/en/3.2/howto/deployment/wsgi/
 """
 
 import os
+from Travelista.settings.settings import DEBUG
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Travelista.settings')
+if DEBUG:
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Travelista.settings.dev')
+else:
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Travelista.settings.prod')
 
 application = get_wsgi_application()
