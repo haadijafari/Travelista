@@ -6,9 +6,7 @@ from .models import Post
 
 
 def blog_home(request, **kwargs):
-    current_datetime = timezone.now()    #This is for filtering by published_date
-    posts = Post.objects.filter(published_date__lt=current_datetime)     #This is for filtering by published_date
-    posts = posts.filter(status=1).order_by('-published_date')
+    posts = Post.posts.showable()
     if cat_name := kwargs.get('cat_name'):
         posts = posts.filter(category__name=cat_name)
     if author := kwargs.get('author'):
@@ -28,9 +26,7 @@ def blog_home(request, **kwargs):
 
 
 def blog_single(request, **kwargs):
-    current_datetime = timezone.now()    #This is for filtering by published_date
-    posts = Post.objects.filter(published_date__lt=current_datetime)
-    posts = posts.filter(status=1)
+    posts = Post.posts.showable()
     if pid := kwargs.get('pid'):
         post = posts.get(id=pid)
         post.counted_views += 1
@@ -41,7 +37,7 @@ def blog_single(request, **kwargs):
 
 
 def blog_search(request):
-    posts = Post.objects.filter(status=1)
+    posts = Post.posts.showable()
     if request.method == 'GET':
         if s := request.GET.get('search'):
             posts = posts.filter(content__icontains=s)
