@@ -6,7 +6,7 @@ from .models import Post
 
 
 def blog_home(request, **kwargs):
-    posts = Post.posts.showable()
+    posts = Post.posts.showable().select_related('author')
     if cat_name := kwargs.get('cat_name'):
         posts = posts.filter(category__name=cat_name)
     if author := kwargs.get('author'):
@@ -27,12 +27,13 @@ def blog_home(request, **kwargs):
 
 def blog_single(request, **kwargs):
     posts = Post.posts.showable()
+    content = {'posts': posts }
     if pid := kwargs.get('pid'):
-        post = posts.get(id=pid)
+        # post = posts.get(id=pid)
+        post = get_object_or_404(posts, pk=pid)
         post.counted_views += 1
         post.save()
-        # post = get_object_or_404(posts, pk=pid)
-    content = {'post': post, 'posts': posts }
+        content['post'] = post
     return render(request, 'blog/blog-single.html', content)
 
 

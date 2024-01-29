@@ -1,5 +1,4 @@
 from django import template
-from django.utils import timezone
 from apps.blog.models import Post, Category
 
 register = template.Library()
@@ -7,19 +6,13 @@ register = template.Library()
 
 @register.inclusion_tag('blog/blog-popular-post.html')
 def latest_posts(arg=3):
-    current_datetime = timezone.now()  # This is for filtering by published_date
-    # This is for filtering by published_date
-    posts = Post.objects.filter(published_date__lt=current_datetime)
-    posts = posts.filter(status=1).order_by('-published_date')[:arg]
+    posts = Post.posts.showable()[:arg]
     return {'posts': posts}
 
 
 @register.inclusion_tag('blog/blog-post-category.html')
 def categories():
-    current_datetime = timezone.now()  # This is for filtering by published_date
-    # This is for filtering by published_date
-    posts = Post.objects.filter(published_date__lt=current_datetime)
-    posts = posts.filter(status=1)
+    posts = Post.posts.showable()
     categories = Category.objects.all()
     cat_dict = {}
     for cat in categories:

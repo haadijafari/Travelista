@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     
     'apps.blog',
     'apps.mainPage',
+
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -94,3 +96,6 @@ MEDIA_URL = '/media/'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Taggit
+TAGGIT_CASE_INSENSITIVE = False
