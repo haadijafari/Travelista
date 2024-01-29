@@ -1,6 +1,6 @@
 from django import template
-from blog.models import Post, Category
 from django.utils import timezone
+from apps.blog.models import Post, Category
 
 register = template.Library()
 

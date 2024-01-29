@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from mainPage.forms import ContactForm
 from django.contrib import messages
+from .forms import ContactForm
 
 def mainPage(request):
     return render(request, 'Travelista/index.html')

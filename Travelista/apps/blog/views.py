@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from blog.models import Post
 from itertools import chain
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils import timezone   #This is for filtering by published_date
+from .models import Post
 
 
 def blog_home(request, **kwargs):
