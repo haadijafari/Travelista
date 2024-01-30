@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models import Q
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
@@ -9,7 +10,7 @@ from taggit.managers import TaggableManager
 class PostManager(models.Manager):
     def showable(self):
         current_datetime = timezone.now()
-        posts = self.filter(Q(status=1) &
+        posts = self.filter(Q(status=Post.StatusChoices.PUBLISHED) &
                             Q(published_date__lt=current_datetime)).order_by('-published_date')
         return posts
 
@@ -18,6 +19,7 @@ class Category(models.Model):
     active = models.BooleanField(_('Active'), default=True)
 
     class Meta:
+        ordering = ['name']
         verbose_name = _('category')
         verbose_name_plural = _('categories')
 
@@ -38,8 +40,8 @@ class Post(models.Model):
     tag = TaggableManager(_('Tag'), blank=True)
     category = models.ManyToManyField(Category)
     counted_views = models.IntegerField(_('Counted Views'), default=0)
-    # status = models.CharField(_('Status'), default=StatusChoices.DRAFT, max_length=15, null=False, choices=StatusChoices.choices)
-    status = models.BooleanField(_('Status'), default=False)
+    status = models.CharField(_('Status'), default=StatusChoices.DRAFT, max_length=15, null=False, choices=StatusChoices.choices)
+    # status = models.BooleanField(_('Status'), default=False)
     published_date = models.DateTimeField(_('Publish Date'), null=True, blank=True)
     created_date = models.DateTimeField(_('Created Date'), auto_now_add=True)
     updated_date = models.DateTimeField(_('Updated Date'), auto_now=True)
@@ -51,6 +53,11 @@ class Post(models.Model):
         verbose_name = _('Post')
         verbose_name_plural = _('Posts')
         ordering = ('-published_date',)
+
+    def get_absolute_url(self):
+        return reverse('blog:single', args=[
+            self.id,
+        ])
 
     def __str__(self) -> str:
         return self.title
