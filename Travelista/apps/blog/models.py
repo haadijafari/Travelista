@@ -32,7 +32,7 @@ class Post(models.Model):
         DRAFT = _('Draft')
         PUBLISHED = _('Published')
 
-    img = models.ImageField(_('Image'), upload_to='', default='blog_media/default.jpg')
+    img = models.ImageField(_('Image'), upload_to='blog_media/', default='blog_media/default.jpg')
     author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True, blank=False)
     title = models.CharField(_('Title'), max_length=255)
     slug = models.SlugField(_('Slug'), max_length=255, allow_unicode=True, unique_for_date='published_date')

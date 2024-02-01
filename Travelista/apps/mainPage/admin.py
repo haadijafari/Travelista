@@ -9,6 +9,5 @@ class ContactAdmin(admin.ModelAdmin):
         'subject',
         'email',
         'created_date',
-        'updated_date',
     ]
     search_fields = ('name', 'email', 'subject', )
