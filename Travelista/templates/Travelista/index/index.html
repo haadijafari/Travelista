@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static index_tags %}
 
 {% block content %}
     {% include './index-banner.html' %}
@@ -10,6 +10,6 @@
 
     {% include './index-home-about.html' %}
 
-    {% include './index-blog-area.html' %}
+    {% latest_posts 6 %}
 
 {% endblock content %}
