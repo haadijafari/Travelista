@@ -3,7 +3,7 @@ from django.contrib import messages
 from .forms import ContactForm
 
 def mainPage(request):
-    return render(request, 'Travelista/index.html')
+    return render(request, 'Travelista/index/index.html')
 
 def contact(request):
     if request.method == 'POST':
