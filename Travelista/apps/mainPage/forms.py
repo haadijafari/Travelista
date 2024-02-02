@@ -1,7 +1,18 @@
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 from django import forms
 from .models import Contact
+# import os
 
 class ContactModelForm(forms.ModelForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox(
+        attrs={
+            'data-theme': 'light',
+        }
+    ),
+        # public_key=os.environ['RECAPTCHA_PUBLIC_KEY'],
+        # private_key=os.environ['RECAPTCHA_PRIVATE_KEY'],
+    )
     class Meta:
         model = Contact
         fields = [
