@@ -1,0 +1,95 @@
+{% load static %}
+<!-- Start contact-page Area -->
+<section class="contact-page-area section-gap">
+	<div class="container">
+		<div class="row">
+            <!-- Map -->
+			<div class="map-wrap" style="width:100%; height: 445px;" id="map"></div>
+
+            <!-- Contact Info -->
+			<div class="col-lg-4 d-flex flex-column address-wrap">
+				<div class="single-contact-address d-flex flex-row">
+					<div class="icon">
+						<span class="lnr lnr-home"></span>
+					</div>
+					<div class="contact-details">
+						<h5>Binghamton, New York</h5>
+						<p>
+							4343 Hinkle Deegan Lake Road
+						</p>
+					</div>
+				</div>
+				<div class="single-contact-address d-flex flex-row">
+					<div class="icon">
+						<span class="lnr lnr-phone-handset"></span>
+					</div>
+					<div class="contact-details">
+						<h5>00 (958) 9865 562</h5>
+						<p>Mon to Fri 9am to 6 pm</p>
+					</div>
+				</div>
+				<div class="single-contact-address d-flex flex-row">
+					<div class="icon">
+						<span class="lnr lnr-envelope"></span>
+					</div>
+					<div class="contact-details">
+						<h5>support@colorlib.com</h5>
+						<p>Send us your query anytime!</p>
+					</div>
+				</div>
+			</div>
+
+            <!-- Contact Form -->
+			<div class="col-lg-8">
+				{% block popup_content %}
+					<!-- Popup structure -->
+					<div class="message-popup p-5" id="message-popup">
+						<div class="message-content">
+							<h2 class="h1 mx-5 mt-5 mb-4">Form Submission Message</h2>
+							{% if messages %}
+								{% for message in messages %}
+									<div class="alert {% if message.tags %}
+									                        alert-{% if message.tags == 'error' %}danger{% elif message.tags == 'success' %}success{% endif %}
+                                                      {% endif %}">
+                                        {{ message|safe }}
+                                    </div>
+								{% endfor %}
+                                <ul>
+                                {% for field in form %}
+                                    {% if field.errors %}
+                                    <div class="alert alert-danger p-3">
+                                	{{ field.name }}:{{ field.errors }}
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                                </ul>
+                                
+							{% endif %}
+							<button class="btn btn-primary" id="close-popup">Close</button>
+						</div>
+					</div>
+				{% endblock %}
+				<form class="form-area contact-form text-right" action="{% url 'index:contact' %}" method="post">
+					{% csrf_token %}
+					<div class="row">
+						<div class="col-lg-6 form-group">
+							<input name="name" placeholder="Enter your name (Default: Anonymous)" class="common-input mb-20 form-control" type="text">
+
+							<input name="email" placeholder="Enter email address" class="common-input mb-20 form-control" required type="email">
+
+							<input name="subject" placeholder="Enter subject" class="common-input mb-20 form-control" type="text">
+						</div>
+						<div class="col-lg-6 form-group">
+							<textarea class="common-textarea form-control" name="message" placeholder="Enter Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Messege'" required=""></textarea>
+						</div>
+						<div class="col-lg-12">
+							<div class="alert-msg" style="text-align: left;"></div>
+							<button class="genric-btn primary" style="float: right;">Send Message</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End contact-page Area -->
