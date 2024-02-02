@@ -4533,3 +4533,12 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin-top: 10px;
     cursor: pointer;
 }
+
+/* Captcha */
+.captcha {
+    text-align: center;
+}
+
+.g-recaptcha {
+    display: inline-block;
+}
