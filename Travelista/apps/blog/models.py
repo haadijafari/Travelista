@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
+from ckeditor.fields import RichTextField
 
 
 class PostManager(models.Manager):
@@ -36,7 +37,7 @@ class Post(models.Model):
     author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True, blank=False)
     title = models.CharField(_('Title'), max_length=255)
     slug = models.SlugField(_('Slug'), max_length=255, allow_unicode=True, unique_for_date='published_date')
-    content = models.TextField(_('Content'), )
+    content = RichTextField(_('Content'), )
     tag = TaggableManager(_('Tag'), blank=True)
     category = models.ManyToManyField(Category)
     counted_views = models.IntegerField(_('Counted Views'), default=0)

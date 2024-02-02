@@ -32,6 +32,7 @@ INSTALLED_APPS = [
 
     'taggit',
     'robots',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
