@@ -32,3 +32,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 STATICFILES_DIRS = [
     BASE_DIR / "statics",
 ]
+
+# Captcha
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
