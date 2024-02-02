@@ -16,7 +16,7 @@ def contact(request):
             messages.add_message(request, messages.ERROR,
                                  'Your ticket didn\'t submitted')
     elif request.method == 'GET':
-        form = ContactModelForm(initial={'name': 'Anonymous'})
+        form = ContactModelForm()
     return render(request, 'Travelista/contact/contact.html', {'form': form})
 
 def about(request):
