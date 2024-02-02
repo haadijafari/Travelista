@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'apps.mainPage',
 
     'taggit',
+    'robots',
 ]
 
 MIDDLEWARE = [
@@ -105,3 +106,10 @@ TAGGIT_CASE_INSENSITIVE = False
 
 # Sites Framework
 SITE_ID = 1
+
+# Robots
+ROBOTS_USE_SITEMAP = True
+ROBOTS_SITEMAP_VIEW_NAME = 'django.contrib.sitemaps.views.sitemap'
+ROBOTS_USE_HOST = True
+ROBOTS_USE_SCHEME_IN_HOST = True
+ROBOTS_CACHE_TIMEOUT = 60*60*24
