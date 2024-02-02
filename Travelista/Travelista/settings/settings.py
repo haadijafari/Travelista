@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'django.contrib.sites',
 
     'apps.blog',
     'apps.mainPage',
@@ -100,3 +101,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Taggit
 TAGGIT_CASE_INSENSITIVE = False
+
+# Sites Framework
+SITE_ID = 1
