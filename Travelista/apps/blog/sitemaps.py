@@ -6,8 +6,8 @@ from apps.blog.models import Post
 
 
 class BlogSitemap(sitemaps.Sitemap):
+    priority = 0.7
     changefreq = "weekly"
-    priority = 0.8
     protocol = 'https'
 
     def items(self):

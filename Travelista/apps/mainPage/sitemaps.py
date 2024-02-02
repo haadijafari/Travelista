@@ -3,7 +3,7 @@ from django.contrib import sitemaps
 from django.urls import reverse
 
 class MainPageViewSitemap(sitemaps.Sitemap):
-    priority = 0.5
+    priority = 0.9
     changefreq = "daily"
     protocol = 'https'
 
