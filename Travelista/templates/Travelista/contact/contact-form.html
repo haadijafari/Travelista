@@ -41,22 +41,31 @@
 
             <!-- Contact Form -->
 			<div class="col-lg-8">
-				{% comment %} {% if messages %}
-					{% for message in messages %}
-						<div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
-					{% endfor %}
-				{% endif %} {% endcomment %}
 				{% block popup_content %}
 					<!-- Popup structure -->
-					<div id="message-popup" class="message-popup">
+					<div class="message-popup p-5" id="message-popup">
 						<div class="message-content">
-							<h2>Form Submission Message</h2>
+							<h2 class="h1 mx-5 mt-5 mb-4">Form Submission Message</h2>
 							{% if messages %}
 								{% for message in messages %}
-									<div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
+									<div class="alert {% if message.tags %}
+									                        alert-{% if message.tags == 'error' %}danger{% elif message.tags == 'success' %}success{% endif %}
+                                                      {% endif %}">
+                                        {{ message|safe }}
+                                    </div>
 								{% endfor %}
+                                <ul>
+                                {% for field in form %}
+                                    {% if field.errors %}
+                                    <div class="alert alert-danger p-3">
+                                	{{ field.name }}:{{ field.errors }}
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                                </ul>
+                                
 							{% endif %}
-							<button id="close-popup">Close</button>
+							<button class="btn btn-primary" id="close-popup">Close</button>
 						</div>
 					</div>
 				{% endblock %}
