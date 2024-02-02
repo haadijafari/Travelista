@@ -4,10 +4,13 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Contact(models.Model):
-    name = models.CharField(_('Full Name'), max_length=100, validators=[MaxLengthValidator])
-    email = models.EmailField(_('Email Address'), max_length=255, validators=[EmailValidator])
-    subject = models.CharField(_('Subject'), max_length=255, blank=True, validators=[MaxLengthValidator])
-    message = models.TextField(_('Message Text'), )
+    name = models.CharField(_('Full Name'), max_length=100, null=False, blank=True,
+                            validators=[MaxLengthValidator])
+    email = models.EmailField(_('Email Address'), max_length=255, null=False, blank=False,
+                              validators=[EmailValidator])
+    subject = models.CharField(_('Subject'), max_length=255, blank=True,
+                               validators=[MaxLengthValidator])
+    message = models.TextField(_('Message Text'), null=False, blank=False)
     created_date = models.DateTimeField(_('Created Date'), auto_now_add=True)
     updated_date = models.DateTimeField(_('Updated Date'), auto_now=True)
 
