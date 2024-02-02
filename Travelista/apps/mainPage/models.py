@@ -2,6 +2,7 @@ from django.core.validators import MaxLengthValidator, EmailValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+
 class Contact(models.Model):
     name = models.CharField(_('Full Name'), max_length=100, validators=[MaxLengthValidator])
     email = models.EmailField(_('Email Address'), max_length=255, validators=[EmailValidator])
