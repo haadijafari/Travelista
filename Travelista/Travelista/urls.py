@@ -1,12 +1,28 @@
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+
+from apps.blog.sitemaps import BlogSitemap
+from apps.mainPage.sitemaps import MainPageViewSitemap
+
+sitemaps = {
+    'index': MainPageViewSitemap,
+    'blog': BlogSitemap,
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.mainPage.urls')),
     path('blog/', include('apps.blog.urls')),
+
+    path(
+        "sitemap.xml",
+        sitemap,
+        {"sitemaps": sitemaps},
+        name="django.contrib.sitemaps.views.sitemap",
+    ),
 ]
 
 # Manage static files and url through nginx in production
