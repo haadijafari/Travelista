@@ -24,6 +24,8 @@ urlpatterns = [
         name="django.contrib.sitemaps.views.sitemap",
     ),
     re_path(r'^robots\.txt', include('robots.urls')),
+
+    path('accounts/', include('allauth.urls')),
 ]
 
 # Manage static files and url through nginx in production

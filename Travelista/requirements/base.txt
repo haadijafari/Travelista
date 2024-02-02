@@ -6,3 +6,4 @@ django-robots
 django-ckeditor
 django-recaptcha==3.0.0
 django_multi_captcha_admin
+django-allauth
