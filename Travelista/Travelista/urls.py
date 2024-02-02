@@ -26,6 +26,7 @@ urlpatterns = [
     re_path(r'^robots\.txt', include('robots.urls')),
 
     path('accounts/', include('allauth.urls')),
+    path('accounts/', include('allauth.socialaccount.urls')),
 ]
 
 # Manage static files and url through nginx in production

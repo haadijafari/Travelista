@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.google',
 ]
 
@@ -85,25 +84,26 @@ AUTHENTICATION_BACKENDS = [
 ]
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
 LOGIN_REDIRECT_URL = '/'
-# SOCIALACCOUNT_PROVIDERS = {
-#     'github': {
-#         'APP': {
-#             'client_id': '123',
-#             'secret': '456',
-#             'key': ''
-#         }
-#     },
-#     'google': {
-#             'APP': {
-#                 'client_id': '123',
-#                 'secret': '456',
-#                 'key': ''
-#             }
-#         },
-# }
+ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+            'APP': {
+                'client_id': os.environ['GOOGLE_CLIENT_PUBLIC'],
+                'secret': os.environ['GOOGLE_CLIENT_SECRET'],
+                'key': ''
+            },
+            'SCOPE': [
+                'profile',
+                'email',
+            ],
+            'AUTH_PARAMS': {
+                'access_type': 'online',
+            }
+        },
+}
 
 WSGI_APPLICATION = 'Travelista.wsgi.application'
 
