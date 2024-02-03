@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
 
+    'auths.users',
     'apps.blog',
     'apps.mainPage',
 
@@ -36,6 +37,11 @@ INSTALLED_APPS = [
     'robots',
     'ckeditor',
     'captcha',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -46,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # allauth
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'Travelista.urls'
@@ -61,13 +69,48 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # allauth:
+                'django.template.context_processors.request',
             ],
         },
     },
 ]
 
+# allauth
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_USERNAME_REQUIRED = True
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
+LOGIN_REDIRECT_URL = '/'
+SIGNUP_REDIRECT_URL = '/'
+ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+            'APP': {
+                'client_id': os.environ['GOOGLE_CLIENT_PUBLIC'],
+                'secret': os.environ['GOOGLE_CLIENT_SECRET'],
+                'key': ''
+            },
+            'SCOPE': [
+                'profile',
+                'email',
+            ],
+            'AUTH_PARAMS': {
+                'access_type': 'online',
+            }
+        },
+}
+
 WSGI_APPLICATION = 'Travelista.wsgi.application'
 
+AUTH_USER = 'users.User'
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [

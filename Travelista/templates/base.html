@@ -1,4 +1,4 @@
-{% load static %}
+{% load static socialaccount %}
 
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
@@ -39,8 +39,13 @@
 				<div class="row align-items-center">
 					<div class="col-lg-6 col-sm-6 col-6 header-top-left">
 						<ul>
-							<li><a href="#">Visit Us</a></li>
-							<li><a href="#">Buy Tickets</a></li>
+                            {% if request.user.is_authenticated %}
+                            <li><a  href="#">Logged in as {{request.user.email}}</a></li>
+                            <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                            {% else %}
+							<li><a href="{% url 'account_login' %}">Login</a></li>
+							<li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+                            {% endif %}
 						</ul>			
 					</div>
 					<div class="col-lg-6 col-sm-6 col-6 header-top-right">
@@ -180,7 +185,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 		<script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
 		<script src="{% static 'js/popper.min.js' %}"></script>
-		<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>			
+		<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>		
 		<script src="{% static 'js/jquery-ui.js' %}"></script>					
 		<script src="{% static 'js/easing.min.js' %}"></script>			
