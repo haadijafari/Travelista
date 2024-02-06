@@ -1,11 +1,19 @@
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
+from django.contrib.sites.models import Site
 from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import RedirectView
 
 from apps.blog.sitemaps import BlogSitemap
 from apps.mainPage.sitemaps import MainPageViewSitemap
+
+
+def redirect_to_domain(request):
+    current_site = Site.objects.get_current()
+    redirect_url = f"https://{current_site.domain}"
+    return RedirectView.as_view(url=redirect_url)(request)
 
 sitemaps = {
     'index': MainPageViewSitemap,
@@ -27,6 +35,7 @@ urlpatterns = [
 
     path('accounts/', include('allauth.urls')),
     path('accounts/', include('allauth.socialaccount.urls')),
+    path('', redirect_to_domain,),
 ]
 
 # Manage static files and url through nginx in production

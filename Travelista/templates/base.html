@@ -1,4 +1,4 @@
-{% load static socialaccount %}
+{% load static socialaccount compress %}
 
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
@@ -22,6 +22,7 @@
 		<!--
 		CSS
 		============================================= -->
+    {% compress css %}
 		<link rel="stylesheet" href="{% static 'css/linearicons.css' %}">
 		<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 		<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
@@ -31,6 +32,7 @@
 		<link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
 		<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">				
 		<link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% endcompress %}
 	</head>
 	<body>	
 		<header id="header">
@@ -181,12 +183,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				</div>
 			</div>
 		</footer>
-		<!-- End footer Area -->	
-
+		<!-- End footer Area -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+    {% compress js %}
 		<script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
 		<script src="{% static 'js/popper.min.js' %}"></script>
 		<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>		
 		<script src="{% static 'js/jquery-ui.js' %}"></script>					
 		<script src="{% static 'js/easing.min.js' %}"></script>			
 		<script src="{% static 'js/hoverIntent.js' %}"></script>
@@ -197,8 +199,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		<script src="{% static 'js/owl.carousel.min.js' %}"></script>							
 		<script src="{% static 'js/mail-script.js' %}"></script>	
 		<script src="{% static 'js/main.js' %}"></script>
-
-		<!-- JavaScript to show and close the popup -->
+    {% endcompress %}
+    <!-- JavaScript to show and close the popup -->
 		<script>
 			const messagePopup = document.getElementById('message-popup');
         	const closePopupButton = document.getElementById('close-popup');

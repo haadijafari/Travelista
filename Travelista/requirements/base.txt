@@ -7,3 +7,8 @@ django-ckeditor
 django-recaptcha==3.0.0
 django_multi_captcha_admin
 django-allauth
+django-compressor
+beautifulsoup4 # for parser compressor.parser.BeautifulSoupParser and compressor.parser.LxmlParser
+html5lib # parser compressor.parser.Html5LibParser
+csscompressor # For the csscompressor filter compressor.filters.cssmin.CSSCompressorFilter
+calmjs.parse # For the Calmjs filter compressor.filters.jsmin.CalmjsFilter

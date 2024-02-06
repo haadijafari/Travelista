@@ -1,19 +1,16 @@
 from pathlib import Path
 import os
+import re
 from dotenv import load_dotenv, find_dotenv
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-
 # Add .env variables
 load_dotenv(find_dotenv())
-    
 
 SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = os.environ['DEBUG'] == 'True'
-
 
 # Application definition
 INSTALLED_APPS = [
@@ -37,6 +34,7 @@ INSTALLED_APPS = [
     'robots',
     'ckeditor',
     'captcha',
+    'compressor',
 
     'allauth',
     'allauth.account',
@@ -90,22 +88,22 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
 LOGIN_REDIRECT_URL = '/'
 SIGNUP_REDIRECT_URL = '/'
-ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
-            'APP': {
-                'client_id': os.environ['GOOGLE_CLIENT_PUBLIC'],
-                'secret': os.environ['GOOGLE_CLIENT_SECRET'],
-                'key': ''
-            },
-            'SCOPE': [
-                'profile',
-                'email',
-            ],
-            'AUTH_PARAMS': {
-                'access_type': 'online',
-            }
+        'APP': {
+            'client_id': os.environ['GOOGLE_CLIENT_PUBLIC'],
+            'secret': os.environ['GOOGLE_CLIENT_SECRET'],
+            'key': ''
         },
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    },
 }
 
 WSGI_APPLICATION = 'Travelista.wsgi.application'
@@ -128,7 +126,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 LANGUAGE_CODE = 'en-us'
 
@@ -140,10 +137,14 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static and Media files URL
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+]
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -159,9 +160,25 @@ ROBOTS_USE_SITEMAP = True
 ROBOTS_SITEMAP_VIEW_NAME = 'django.contrib.sitemaps.views.sitemap'
 ROBOTS_USE_HOST = True
 ROBOTS_USE_SCHEME_IN_HOST = True
-ROBOTS_CACHE_TIMEOUT = 60*60*24
+ROBOTS_CACHE_TIMEOUT = 60 * 60 * 24
 
 # Multi Captcha Admin
 MULTI_CAPTCHA_ADMIN = {
     'engine': 'recaptcha',
+}
+
+# Django Compressor
+COMPRESS_ENABLED = True
+COMPRESS_FILTERS = {
+    'css': [
+        'compressor.filters.css_default.CssAbsoluteFilter',
+        'compressor.filters.cssmin.rCSSMinFilter',
+        'compressor.filters.css_default.CssRelativeFilter',
+        'compressor.filters.template.TemplateFilter',
+    ],
+    'js': [
+        'compressor.filters.jsmin.rJSMinFilter',
+        'compressor.filters.jsmin.CalmjsFilter',
+        'compressor.filters.template.TemplateFilter',
+    ]
 }
