@@ -3,7 +3,7 @@
 Travelista is my Django 3.2 course project.
 
 
-![Travelista](./src/Travelista.png)
+![Travelista](/src/Travelista.png)
 
 ## Installation
 
