@@ -1,6 +1,5 @@
 from pathlib import Path
 import os
-import re
 from dotenv import load_dotenv, find_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -86,8 +85,8 @@ ACCOUNT_USERNAME_REQUIRED = True
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
-LOGIN_REDIRECT_URL = '/'
-SIGNUP_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/Travelista/'
+SIGNUP_REDIRECT_URL = '/Travelista/'
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
