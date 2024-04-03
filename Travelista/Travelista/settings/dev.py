@@ -1,7 +1,8 @@
 from .settings import *
 
 ALLOWED_HOSTS = [
-    '127.0.0.1'
+    '127.0.0.1',
+    'localhost'
 ]
 
 INSTALLED_APPS += [
@@ -26,11 +27,15 @@ DATABASES = {
 }
 
 # Static and Media files Directory
-STATIC_ROOT = BASE_DIR / 'static'
-MEDIA_ROOT = BASE_DIR / 'media'
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
+STATIC_ROOT = BASE_DIR / 'static_cdn'
+MEDIA_ROOT = BASE_DIR / 'media_cdn'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "statics",
+    BASE_DIR / "static",
+    BASE_DIR / "media",
 ]
 
 # Captcha

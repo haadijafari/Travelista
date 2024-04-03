@@ -1,25 +1,34 @@
 from .settings import *
 
 ALLOWED_HOSTS = [
-    'example.com'
+    'hadijafari.info',
+    'haadijafari.ir',
 ]
 
 # Database
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.mysql',
-       'NAME': 'Name',
-       'USER': 'User',
-       'PASSWORD': 'Password',
-       'HOST': 'localhost',
-       'PORT': '3306',
-   }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ['SQL_NAME'],
+        'USER': os.environ['SQL_USER'],
+        'PASSWORD': os.environ['SQL_PASS'],
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        }
+    }
 }
 
 # Static and Media files Directory
-STATIC_ROOT = 'home/$USER/public_html/static_cdn'
-MEDIA_ROOT = 'home/$USER/public_html/media_cdn'
+STATIC_ROOT = '/home/haadija1/public_html/Travelista/static'
+MEDIA_ROOT = '/home/haadija1/public_html/Travelista/media'
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 # Captcha
 RECAPTCHA_PUBLIC_KEY = os.environ['RECAPTCHA_PUBLIC_KEY']
@@ -28,3 +37,20 @@ RECAPTCHA_PRIVATE_KEY = os.environ['RECAPTCHA_PRIVATE_KEY']
 # RECAPTCHA_DOMAIN = 'www.recaptcha.net'
 RECAPTCHA_DOMAIN = 'www.google.net'
 RECAPTCHA_REQUIRED_SCORE = 0.85
+
+CSRF_COOKIE_SECURE = True #to avoid transmitting the CSRF cookie over HTTP accidentally.
+SESSION_COOKIE_SECURE = True #to avoid transmitting the session cookie over HTTP accidentally.
+
+SECURE_HSTS_SECONDS = 15780000  # 6 Months as Recommended
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
+SECURE_SSL_REDIRECT = True
+
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+CSP_DEFAULT_SRC = ("'self'", "https://www.recaptcha.net", 'https://google.com')
+CSP_SCRIPT_SRC = ("'self'", "https://www.recaptcha.net", "https://www.gstatic.com", "https://www.google.com", "'unsafe-inline'")
+CSP_FRAME_SRC = ("'self'", "https://www.recaptcha.net", "https://www.google.com")
+CSP_STYLE_SRC = ("'self'", "https://stackpath.bootstrapcdn.com", "https://www.recaptcha.net", "https://google.com", "'unsafe-inline'")

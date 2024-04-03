@@ -138,8 +138,6 @@ USE_L10N = True
 USE_TZ = True
 
 # Static and Media files URL
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
