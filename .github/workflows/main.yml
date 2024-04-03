@@ -1,0 +1,23 @@
+on:
+  push:
+    branches:
+      - main
+name: 🚀 Deploy hadijafari.info on push
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: www.hadijafari.info
+        username: ${{ secrets.mysite_ftp_username }}
+        password: ${{ secrets.mysite_ftp_password }}
+        server-dir: ${{ secrets.travelista_server_dir}}
+
+#    - name: 🔨 Migrate
+#      run: python manage.py migrate
