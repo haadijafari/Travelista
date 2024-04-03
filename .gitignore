@@ -1,5 +1,7 @@
 # Production directories
 media/
+static_cdn/
+media_cdn/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
