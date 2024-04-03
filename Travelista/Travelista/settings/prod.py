@@ -24,7 +24,7 @@ DATABASES = {
 STATIC_ROOT = '/home/haadija1/public_html/Travelista/static'
 MEDIA_ROOT = '/home/haadija1/public_html/Travelista/media'
 STATIC_URL = 'Travelista/static/'
-MEDIA_URL = '/media/'
+MEDIA_URL = '/Travelista/media/'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
